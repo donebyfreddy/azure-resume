@@ -1,4 +1,4 @@
-# GPS's Azure Resume
+# Federico Mencuccini's Azure Resume
 
 This is my Cloud Resume Challenge built on Azure. It's a static website hosted on Azure Storage, with a visitor counter built on Azure Functions. The website is built with HTML, CSS, and JavaScript. The visitor counter is built with .NET and Azure Functions. 
 
@@ -13,6 +13,28 @@ If you'd like to build your own, here is the YouTube video [video](https://youtu
 ## Pre-requisites
 
 I leverage [Dev Containers](https://code.visualstudio.com/docs/remote/containers) for my development environment. If you'd like to use it, you'll need to install [Docker](https://www.docker.com/products/docker-desktop) and the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) for VS Code.
+
+Install C# (.NET) SDK (https://dotnet.microsoft.com/es-es/download)
+
+To get NuGet to work:
+dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
+
+
+Git commands:
+ * git config --global core.autocrlf true
+ * rm -rf api/.git
+ * git add .
+ * git add -A
+ * git commit -m "Updated Structure"
+ * git push origin main
+
+Things that could improve keyvault for the Connection String value:
+AccountEndpoint=https://azureresume-db-fede.documents.azure.com:443/;AccountKey=JlXL7dpeMSVvdOmxsF2t4UWxblF0vZl3aB4m3ZZssHvpbrLhswPHxa8zeBTyPDTLeE8W4yiHrcDmACDbEBPUjQ==;
+
+
+If Azure Functions cannot find net8.0/publish folder, it is inside of linux-x64, to change it go to /.vscode folder and settings.json and change it their
+
+AZ Login --tenant "FindTheIdInTenantPropertiesInAzure"
 
 Once installed:
 
