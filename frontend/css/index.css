@@ -13,6 +13,10 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/*HEADER
+============================================
+*/
+
 .header {
     padding-top: 10px;
     display: flex;
@@ -53,153 +57,24 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+    align-items: left; 
 }
 
 .nav-menu a {
     text-decoration: none;
-    color: #007bff;
+    color: black; 
     font-size: 16px;
     margin-bottom: 5px;
+    margin-right: 15px; 
 }
+
+
 
 .nav-menu a:hover {
     text-decoration: underline;
 }
 
-.content-wrapper {
-    display: flex;
-    justify-content: space-between;
-}
 
-.certifications {
-    background-color: #e0e0e059;
-    padding: 20px;
-    flex-basis: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.certifications .cert-row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.certifications img {
-    height: 90px;
-    width: auto;
-}
-
-.visitor-box {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    margin-top: 20px;
-    text-align: center;
-    width: 150px;
-}
-
-.main-section {
-    background-color: white;
-    padding: 20px;
-    flex-basis: 75%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.section-title {
-    font-size: 24px;
-    font-weight: bold;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-
-.experience-item {
-    margin-bottom: 20px;
-}
-
-.experience-item h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #007bff;
-}
-
-.experience-item span {
-    margin: 0;
-    font-size: 14px;
-    color: #000000;
-}
-
-.experience-item p {
-    margin: 5px 0;
-}
-
-
-.project-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.project-list li {
-    margin-bottom: 20px;
-}
-
-.project-link {
-    margin-top: 5px;
-}
-
-.view-project {
-    color: #007bff; /* Link color */
-    text-decoration: none;
-}
-
-.view-project img {
-    height: 16px; /* Adjust icon size */
-    vertical-align: middle; /* Align icon with text */
-    margin-left: 5px; /* Space between text and icon */
-}
-
-.technologies {
-    margin-top: 5px;
-    font-style: italic; /* Optional: Make technology text italic */
-}
-
-.youtube-channel {
-    margin-top: 10px;
-}
-
-.youtube-link {
-    color: #ff0000; /* YouTube link color */
-    text-decoration: none;
-}
-
-.youtube-channel img {
-    height: 16px; /* Adjust icon size */
-    vertical-align: middle; /* Align icon with text */
-    margin-left: 5px; /* Space between text and icon */
-}
-
-
-.education-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.education-list li {
-    margin-bottom: 20px;
-    color: black;
-    onmou
-}
-
-.education-details {
-    margin-top: 5px;
-}
-
-.nav-menu {
-    position: relative;
-}
 
 .dropdown {
     display: inline-block;
@@ -231,18 +106,174 @@ body {
 
 
 
-.nav-menu {
-    display: flex; /* Use flexbox for inline display */
-    align-items: center; /* Vertically center items */
+
+
+/* SECTION (CERTIFICATIONS + MAIN-SECTION 
+============================================
+*/
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
 }
 
-.nav-menu a {
-    margin-right: 15px; /* Space between links */
-    text-decoration: none; /* Remove underline from links */
-    color: black; /* Default text color */
+.right-section {
+    background-color: #e0e0e059;
+    padding: 20px;
+    flex-basis: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right-section .cert-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.right-section img {
+    height: 90px;
+    width: auto;
+}
+
+.visitor-box {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 150px;
+}
+
+/* Languages Section */
+.language-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+.language-list img {
+    width: 20px;
+    height: 20px;
+    padding-right: 5px;
+    vertical-align: middle;
+
+}
+
+.language-list li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.language-level {
+    font-weight: bold;
+    color: #007bff; /* Matches the link color for consistency */
+}
+
+/* Skills Section */
+.skills-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.skills-list li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.skills-list li::before {
+    content: "\2023"; /* Bullet point */
+    color: #000000; /* Matches the theme color */
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 
+/* Interests Section */
+.interests-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.interests-list li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.interests-list li::before {
+    content: "\2023"; /* Bullet point */
+    color: #000000; /* Matches the theme color */
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+
+
+
+.main-section {
+    background-color: white;
+    padding: 20px;
+    flex-basis: 75%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+
+/* EXPERIENCE SECTION
+============================================
+*/
+
+.experience-item {
+    margin-bottom: 20px;
+}
+
+.experience-item h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #007bff;
+}
+
+.experience-item span {
+    font-size: 14px;
+    color: #000000;
+}
+
+.experience-item p {
+    margin: 5px 0;
+}
 
 
 .job-recommendation {
@@ -251,42 +282,136 @@ body {
     justify-content: space-between;
     padding-left: 20px;
 
-  }
+}
   
-  .job-recommendation ul {
-    list-style: none; /* Remove default bullet points */
-    padding-left: 0;
-    margin-right: 20px; /* Spacing between the list and the link */
-  }
-  
-  .job-recommendation ul li {
-    position: relative;
-    padding-left: 15px;
-    margin-bottom: 10px;
-  }
-  
-  .job-recommendation ul li::before {
-    content: "\2022"; /* Custom bullet point */
-    color: black;
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-  
-  .recommendation-link {
-    display: flex;
-    align-items: center;
-    color: #007bff; /* Color of the link */
+.job-recommendation ul {
+list-style: none; 
+padding-left: 0;
+margin-right: 20px; 
+}
+
+.job-recommendation ul li {
+position: relative;
+display: flex;
+flex-basis: 70%;
+padding-left: 15px;
+margin-bottom: 10px;
+}
+
+.job-recommendation ul li::before {
+content: "\2022"; 
+color: black;
+font-weight: bold;
+position: absolute;
+left: 0;
+top: 0;
+}
+
+.recommendation-link {
+display: flex;
+flex-basis: 30%;
+align-items: center;
+text-decoration: none;
+border-style: solid;
+border-width: 2px;
+border-color: black;
+padding: 10px;
+}
+
+.recommendation-link i {
+color: red;
+border: #000000;
+}
+
+.recommendation-link:hover {
+text-decoration: underline;
+}
+
+
+
+/* PROJECTS
+============================================
+*/
+
+.project-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.project-list li {
+    margin-bottom: 20px;
+}
+
+.project-link {
+    margin-top: 5px;
+}
+
+.view-project {
+    color: #007bff; 
     text-decoration: none;
-  }
-  
-  .recommendation-link i {
-    color: red; /* Icon color */
-  }
-  
-  .recommendation-link:hover {
-    text-decoration: underline;
-  }
-  
+}
+
+.view-project img {
+    height: 16px; 
+    vertical-align: middle; 
+    margin-left: 5px; 
+}
+
+.technologies {
+    margin-top: 5px;
+    font-style: italic; 
+}
+
+.youtube-channel {
+    margin-top: 10px;
+}
+
+.youtube-link {
+    color: #ff0000; 
+    text-decoration: none;
+}
+
+.youtube-channel img {
+    height: 16px; 
+    vertical-align: middle; 
+    margin-left: 5px; 
+}
+
+
+/* EDUCATION
+============================================
+*/
+
+.education-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.education-list li {
+    margin-bottom: 20px;
+
+}
+
+.certification-list li {
+    list-style-type: circle;
+    color: black;
+}
+
+.certification-list li:hover {
+    color: blue; 
+    text-decoration: underline; 
+    
+}
+
+
+.education-details {
+    margin-top: 5px;
+}
+
+
+
+
+
+
+
   
