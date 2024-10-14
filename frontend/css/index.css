@@ -122,8 +122,14 @@ body {
 
 .experience-item h3 {
     margin: 0;
-    font-size: 20px;
+    font-size: 18px;
     color: #007bff;
+}
+
+.experience-item span {
+    margin: 0;
+    font-size: 14px;
+    color: #000000;
 }
 
 .experience-item p {
@@ -235,3 +241,50 @@ body {
 }
 
 
+
+
+.job-recommendation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+
+  }
+  
+  .job-recommendation ul {
+    list-style: none; /* Remove default bullet points */
+    padding-left: 0;
+    margin-right: 20px; /* Spacing between the list and the link */
+  }
+  
+  .job-recommendation ul li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .job-recommendation ul li::before {
+    content: "\2022"; /* Custom bullet point */
+    color: black;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .recommendation-link {
+    display: flex;
+    align-items: center;
+    color: #007bff; /* Color of the link */
+    text-decoration: none;
+  }
+  
+  .recommendation-link i {
+    color: red; /* Icon color */
+  }
+  
+  .recommendation-link:hover {
+    text-decoration: underline;
+  }
+  
+  
