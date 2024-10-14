@@ -1,0 +1,237 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    background-color: #e0e0e059;
+}
+
+.header .left-info {
+    text-align: left;
+}
+
+.header .name {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header .contact-info {
+    font-size: 14px;
+    text-align: center;
+}
+
+.header .photo {
+    text-align: right;
+    padding-right: 30px;
+}
+
+.header img {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.nav-menu a:hover {
+    text-decoration: underline;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.certifications {
+    background-color: #e0e0e059;
+    padding: 20px;
+    flex-basis: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.certifications .cert-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.certifications img {
+    height: 90px;
+    width: auto;
+}
+
+.visitor-box {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+    width: 150px;
+}
+
+.main-section {
+    background-color: white;
+    padding: 20px;
+    flex-basis: 75%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.experience-item {
+    margin-bottom: 20px;
+}
+
+.experience-item h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #007bff;
+}
+
+.experience-item p {
+    margin: 5px 0;
+}
+
+
+.project-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.project-list li {
+    margin-bottom: 20px;
+}
+
+.project-link {
+    margin-top: 5px;
+}
+
+.view-project {
+    color: #007bff; /* Link color */
+    text-decoration: none;
+}
+
+.view-project img {
+    height: 16px; /* Adjust icon size */
+    vertical-align: middle; /* Align icon with text */
+    margin-left: 5px; /* Space between text and icon */
+}
+
+.technologies {
+    margin-top: 5px;
+    font-style: italic; /* Optional: Make technology text italic */
+}
+
+.youtube-channel {
+    margin-top: 10px;
+}
+
+.youtube-link {
+    color: #ff0000; /* YouTube link color */
+    text-decoration: none;
+}
+
+.youtube-channel img {
+    height: 16px; /* Adjust icon size */
+    vertical-align: middle; /* Align icon with text */
+    margin-left: 5px; /* Space between text and icon */
+}
+
+
+.education-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.education-list li {
+    margin-bottom: 20px;
+}
+
+.education-details {
+    margin-top: 5px;
+}
+
+.nav-menu {
+    position: relative;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+
+
+.nav-menu {
+    display: flex; /* Use flexbox for inline display */
+    align-items: center; /* Vertically center items */
+}
+
+.nav-menu a {
+    margin-right: 15px; /* Space between links */
+    text-decoration: none; /* Remove underline from links */
+    color: black; /* Default text color */
+}
+
+

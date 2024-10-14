@@ -1,0 +1,35 @@
+name: deploy_frontend
+# Deploys when push is made from frontend folder
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v2
+      
+      # Log in to Azure
+      - name: login with azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Upload frontend files to Azure Blob Storage's $web container
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az storage blob upload-batch --account-name resumestoragefreddy -d '$web' -s frontend/
+      
+      # Azure logout
+      - name: logout
+        run: |
+          az logout
