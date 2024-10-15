@@ -13,11 +13,6 @@ provider "azurerm" {
   resource_provider_registrations = "none"
 }
 
-variable "local_path" {
-  description = "The local path to the directory containing files to upload."
-  type        = string
-  default     = "C:/Users/Federico Mencuccini/Mencuccini Dropbox/Federico Mencuccini/Aplicaciones/Azure Projects/azure-resume/frontend"
-}
 
 # Data block to get current client config
 data "azurerm_client_config" "current" {}
@@ -25,35 +20,43 @@ data "azurerm_client_config" "current" {}
 
 # Create a Resource Group
 resource "azurerm_resource_group" "rg" {
-  name     = "resume-resources-2"
-  location = "East US"  # Change to your preferred region
+  name     = var.resource_group_name
+  location = var.location
 }
 
 
 # Create Storage Account for the Function App
-resource "azurerm_storage_account" "resumestorage" {
-  name                     = "resumestoragetestfede"
+resource "azurerm_storage_account" "resumestoragetestfede" {
+  name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+  
+  account_tier             = var.storage_account_tier
+  account_replication_type = var.storage_account_replication_type
+  account_kind             = var.storage_account_kind
+
+  static_website {
+    index_document = var.static_website_index_document
+  }
 }
 
 
 resource "azurerm_storage_container" "webstorage" {
-  name                  = "web"
-  storage_account_name  = azurerm_storage_account.resumestorage.name
-  container_access_type = "blob"
+  name                  = var.storage_container_name
+  storage_account_name  = azurerm_storage_account.resumestoragetestfede.name
+  container_access_type = var.storage_container_access_type
+
+  depends_on = [azurerm_storage_account.resumestoragetestfede]
 }
 
 
 # Create CosmosDB Account
 resource "azurerm_cosmosdb_account" "cosmosdb" {
-  name                = "azureresume-db-testfede"
+  name                = var.cosmosdb_account_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  offer_type          = "Standard"
-  kind                = "GlobalDocumentDB"
+  offer_type          = var.cosmosdb_account_offer_type
+  kind                = var.cosmosdb_account_kind
   
   consistency_policy {
     consistency_level = "Session"
@@ -67,18 +70,22 @@ resource "azurerm_cosmosdb_account" "cosmosdb" {
 
 # Create CosmosDB Database
 resource "azurerm_cosmosdb_sql_database" "cosmosdb_db" {
-  name                = "AzureResumeTestFede"
+  name                = var.cosmosdb_sql_database_name
   resource_group_name = azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.cosmosdb.name
+
+  depends_on = [azurerm_cosmosdb_account.cosmosdb]
 }
 
 # Create CosmosDB Container
 resource "azurerm_cosmosdb_sql_container" "cosmosdb_container" {
-  name                = "Counter"
+  name                = var.cosmosdb_sql_container_name
   resource_group_name = azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.cosmosdb.name
   database_name       = azurerm_cosmosdb_sql_database.cosmosdb_db.name
   partition_key_paths = ["/id"]
+
+  depends_on = [azurerm_cosmosdb_sql_database.cosmosdb_db]
 }
 
 
@@ -86,10 +93,10 @@ resource "azurerm_cosmosdb_sql_container" "cosmosdb_container" {
 
 # Create Key Vault
 resource "azurerm_key_vault" "kv" {
-  name                = "MyTestingVault-Fede"  # Ensure this name is unique
+  name                = var.key_vault_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  sku_name            = "standard"
+  sku_name            = var.key_vault_sku_name
   tenant_id           = data.azurerm_client_config.current.tenant_id
 
   # Set access policies as needed
@@ -98,55 +105,61 @@ resource "azurerm_key_vault" "kv" {
     object_id = data.azurerm_client_config.current.object_id
 
     key_permissions    = ["Get", "List", "Recover"]
-    secret_permissions = ["Get", "Set", "List", "Delete", "Recover"]
+    secret_permissions = ["Get", "Set", "List", "Delete", "Recover", "Purge"]
   }
 
 }
 
 # Create a secret in the Key Vault
 resource "azurerm_key_vault_secret" "cosmos_db_connection_string" {
-  name         = "CosmosDbConnectionString"
-  value        = "AccountEndpoint=https://azureresume-db-fede.documents.azure.com:443/;AccountKey=JlXL7dpeMSVvdOmxsF2t4UWxblF0vZl3aB4m3ZZssHvpbrLhswPHxa8zeBTyPDTLeE8W4yiHrcDmACDbEBPUjQ==;"
+  name         = var.key_vault_secret_name
+  value        = var.key_vault_secret_value
   key_vault_id = azurerm_key_vault.kv.id
+
+  depends_on = [azurerm_key_vault.kv]
 }
 
 
-# Create App Service Plan for the Function App
 # Create App Service Plan for the Function App
 resource "azurerm_service_plan" "app_plan" {
-  name                = "MyTestAppServicePlan"
+  name                = var.service_plan_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  os_type             = "Linux"
-  sku_name            = "B1"  # Change to a valid SKU like B1, S1, etc.
+  os_type             = var.service_plan_os_type
+  sku_name            = var.service_plan_sku_name
+
 }
 
-
-# Create the Linux Web App
-resource "azurerm_linux_web_app" "function" {
-  name                = "MyTestFunction-TestFede"
+# Create the Function App
+resource "azurerm_function_app" "function" {
+  name                = var.function_app_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_service_plan.app_plan.location
-  service_plan_id     = azurerm_service_plan.app_plan.id
+  app_service_plan_id     = azurerm_service_plan.app_plan.id
+  storage_account_name   = azurerm_storage_account.resumestoragetestfede.name
+  storage_account_access_key = azurerm_storage_account.resumestoragetestfede.primary_access_key
+  os_type             = var.function_app_os_type
 
   app_settings = {
     "FUNCTIONS_WORKER_RUNTIME" = "dotnet-isolated"  # Use the correct runtime here
-    "AzureWebJobsStorage" = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.resumestorage.name};AccountKey=${azurerm_storage_account.resumestorage.primary_access_key};EndpointSuffix=core.windows.net"  # Important for Azure Functions
-    "CosmosDbConnectionString" = azurerm_key_vault_secret.cosmos_db_connection_string.value  # Reference the Key Vault secret
+    "AzureWebJobsStorage" = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.resumestoragetestfede.name};AccountKey=${azurerm_storage_account.resumestoragetestfede.primary_access_key};EndpointSuffix=core.windows.net"
+    "CosmosDbConnectionString" = azurerm_key_vault_secret.cosmos_db_connection_string.value
   }
 
-  site_config {}
+  site_config {
+    cors {
+      allowed_origins = [
+        "${azurerm_storage_account.resumestoragetestfede.primary_web_endpoint}"
+      ]
+    }
+  }
+
+  depends_on = [
+    azurerm_service_plan.app_plan,
+    azurerm_storage_account.resumestoragetestfede,
+    azurerm_key_vault.kv
+  ]
 }
 
-
-resource "azurerm_storage_blob" "tamopsblobs" {
-  for_each = fileset(path.module, "frontend/*")
- 
-  name                   = trim(each.key, "frontend/")
-  storage_account_name   = azurerm_storage_account.resumestorage.name
-  storage_container_name = azurerm_storage_container.webstorage.name
-  type                   = "Block"
-  source                 = each.key
-}
 
 
