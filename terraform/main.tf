@@ -74,7 +74,7 @@ resource "azurerm_cosmosdb_sql_database" "cosmosdb_db" {
   resource_group_name = azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.cosmosdb.name
 
-  depends_on = [azurerm_cosmosdb_account.cosmosdb]
+
 }
 
 # Create CosmosDB Container
@@ -85,7 +85,6 @@ resource "azurerm_cosmosdb_sql_container" "cosmosdb_container" {
   database_name       = azurerm_cosmosdb_sql_database.cosmosdb_db.name
   partition_key_paths = ["/id"]
 
-  depends_on = [azurerm_cosmosdb_sql_database.cosmosdb_db]
 }
 
 
@@ -116,7 +115,6 @@ resource "azurerm_key_vault_secret" "cosmos_db_connection_string" {
   value        = var.key_vault_secret_value
   key_vault_id = azurerm_key_vault.kv.id
 
-  depends_on = [azurerm_key_vault.kv]
 }
 
 
@@ -155,7 +153,6 @@ resource "azurerm_function_app" "function" {
   }
 
   depends_on = [
-    azurerm_service_plan.app_plan,
     azurerm_storage_account.resumestoragetestfede,
     azurerm_key_vault.kv
   ]

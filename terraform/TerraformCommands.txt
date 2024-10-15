@@ -26,9 +26,20 @@ terraform apply -auto-approve
 https://staticwebsitek123.z13.web.core.windows.net/
 
 
+# Terraform TfVars files
+
+The default name is "terraform.tfvars"
+
+With only applying if you file is named in that way it will get it automatically if not, you will have to specify it:
+Terraform apply -var-file="resume.tfvars"
+
+If you want it to get it automatically, the extension of the file has to be ".auto.tfvars" instead of ".tfvars"
+
+
 # Terraform Destroy
 terraform destroy -auto-approve
 
 # Delete Terraform files 
 rm -rf .terraform*
 rm -rf terraform.tfstate*
+
