@@ -26,7 +26,7 @@ resource "azurerm_resource_group" "rg" {
 
 
 # Create Storage Account for the Function App
-resource "azurerm_storage_account" "resumestoragetestfede" {
+resource "azurerm_storage_account" "resumestoragetestfedev2" {
   name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
@@ -43,10 +43,10 @@ resource "azurerm_storage_account" "resumestoragetestfede" {
 
 resource "azurerm_storage_container" "webstorage" {
   name                  = var.storage_container_name
-  storage_account_name  = azurerm_storage_account.resumestoragetestfede.name
+  storage_account_name  = azurerm_storage_account.resumestoragetestfedev2.name
   container_access_type = var.storage_container_access_type
 
-  depends_on = [azurerm_storage_account.resumestoragetestfede]
+  depends_on = [azurerm_storage_account.resumestoragetestfedev2]
 }
 
 
@@ -134,26 +134,26 @@ resource "azurerm_function_app" "function" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_service_plan.app_plan.location
   app_service_plan_id     = azurerm_service_plan.app_plan.id
-  storage_account_name   = azurerm_storage_account.resumestoragetestfede.name
-  storage_account_access_key = azurerm_storage_account.resumestoragetestfede.primary_access_key
+  storage_account_name   = azurerm_storage_account.resumestoragetestfedev2.name
+  storage_account_access_key = azurerm_storage_account.resumestoragetestfedev2.primary_access_key
   os_type             = var.function_app_os_type
 
   app_settings = {
     "FUNCTIONS_WORKER_RUNTIME" = "dotnet-isolated"  # Use the correct runtime here
-    "AzureWebJobsStorage" = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.resumestoragetestfede.name};AccountKey=${azurerm_storage_account.resumestoragetestfede.primary_access_key};EndpointSuffix=core.windows.net"
+    "AzureWebJobsStorage" = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.resumestoragetestfedev2.name};AccountKey=${azurerm_storage_account.resumestoragetestfedev2.primary_access_key};EndpointSuffix=core.windows.net"
     "CosmosDbConnectionString" = azurerm_key_vault_secret.cosmos_db_connection_string.value
   }
 
   site_config {
     cors {
       allowed_origins = [
-        "${azurerm_storage_account.resumestoragetestfede.primary_web_endpoint}"
+        "${azurerm_storage_account.resumestoragetestfedev2.primary_web_endpoint}"
       ]
     }
   }
 
   depends_on = [
-    azurerm_storage_account.resumestoragetestfede,
+    azurerm_storage_account.resumestoragetestfedev2,
     azurerm_key_vault.kv
   ]
 }

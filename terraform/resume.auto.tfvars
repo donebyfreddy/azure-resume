@@ -1,9 +1,9 @@
 # Azure Region and Resource Group
 location                            = "westus"
-resource_group_name                 = "resume-resources-5"
+resource_group_name                 = "resume-resources-6"
 
 # Storage Account
-storage_account_name                = "resumewebsitefedetest"
+storage_account_name                = "resumewebsitefedetestv2"
 storage_account_tier                = "Standard"
 storage_account_replication_type    = "LRS"
 storage_account_kind                = "StorageV2"

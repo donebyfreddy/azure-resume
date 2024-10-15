@@ -5,7 +5,7 @@ on:
   push:
       branches: [ main ]
       paths:
-      - 'api/**'
+      - 'backend/api/**'
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'GetResumeCounter-v5'   # set this to your function app name on Azure
@@ -44,8 +44,4 @@ jobs:
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-<<<<<<< HEAD
         #publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }} # Remove publish-profile to use Azure RBAC
-=======
-        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }} # Remove publish-profile to use Azure RBAC
->>>>>>> 9c53300db7953dd05e8d47516784ae207c15619c
