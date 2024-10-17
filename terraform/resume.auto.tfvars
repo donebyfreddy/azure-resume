@@ -3,19 +3,19 @@ location                            = "westus"
 resource_group_name                 = "resume-resources-6"
 
 # Storage Account
-storage_account_name                = "resumewebsitefedetestv2"
+storage_account_name                = "resumewebsitefedetest"
 storage_account_tier                = "Standard"
 storage_account_replication_type    = "LRS"
 storage_account_kind                = "StorageV2"
 
-# Static Website
+# Static Website $web container
+storage_web_container_name          = "$web"
 static_website_index_document       = "index.html"
 static_website_error_404_document   = "error.html"
-static_website_source_folder        = "../frontend"
 
-# Storage Container
-storage_container_name              = "$web"
-storage_container_access_type       = "blob"
+# $web Blob Content
+blob_type = "Block"
+
 
 # Cosmos DB Account
 cosmosdb_account_name               = "azureresume-db-testfede"
@@ -31,6 +31,8 @@ cosmosdb_sql_container_name         = "Counter"
 # Key Vault
 key_vault_name                      = "MyTestingVault-Fede"
 key_vault_sku_name                  = "standard"
+key_vault_key_permissions           = ["Get", "List", "Recover"]
+key_vault_secret_permissions        = ["Get", "Set", "List", "Delete", "Recover", "Purge"]
 
 # Key Vault Secret
 key_vault_secret_name               = "CosmosDbConnectionString"

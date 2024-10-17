@@ -31,7 +31,18 @@ variable "storage_account_kind" {
   type        = string
 }
 
+# Blob Upload
+variable "blob_type" {
+  description = "A map of local files to upload"
+  type        = string
+}
+
 # Static Website
+variable "storage_web_container_name" {
+  description = "The index document for the static website."
+  type        = string
+}
+
 variable "static_website_index_document" {
   description = "The index document for the static website."
   type        = string
@@ -42,21 +53,6 @@ variable "static_website_error_404_document" {
   type        = string
 }
 
-variable "static_website_source_folder" {
-  description = "The local folder containing the static website source."
-  type        = string
-}
-
-# Storage Container
-variable "storage_container_name" {
-  description = "The name of the storage container."
-  type        = string
-}
-
-variable "storage_container_access_type" {
-  description = "The access type of the storage container."
-  type        = string
-}
 
 # Cosmos DB
 variable "cosmosdb_account_name" {
@@ -104,6 +100,15 @@ variable "key_vault_secret_name" {
 variable "key_vault_secret_value" {
   description = "VALUE of the CosmosDB ConnectionString"
   type        = string
+}
+
+variable "key_vault_key_permissions" {
+  description = "Permissions of keys "
+  type = list(string)
+}
+
+variable "key_vault_secret_permissions" {
+  type = list(string)
 }
 
 # APP Service Plan

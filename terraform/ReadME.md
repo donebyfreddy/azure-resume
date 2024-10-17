@@ -37,10 +37,10 @@ This tells Terraform to automatically use it as the default variables file when 
 
 ## Terraform Commands 
 
-terraform init
-terraform plan
-terraform apply --auto-approve
-terraform destroy --auto-approve
-terraform apply -var-file="resume.tfvars"
+* terraform init
+* terraform plan
+* terraform apply --auto-approve
+* terraform destroy --auto-approve
+* terraform apply -var-file="resume.tfvars"
 
 The --auto-approve is for skipping to confirm the process, if you do not put it will ask you "if you are sure in continuing"

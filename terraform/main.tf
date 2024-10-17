@@ -26,7 +26,7 @@ resource "azurerm_resource_group" "rg" {
 
 
 # Create Storage Account for the Function App
-resource "azurerm_storage_account" "resumestoragetestfedev2" {
+resource "azurerm_storage_account" "resumestoragetestfede" {
   name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
@@ -35,19 +35,33 @@ resource "azurerm_storage_account" "resumestoragetestfedev2" {
   account_replication_type = var.storage_account_replication_type
   account_kind             = var.storage_account_kind
 
-  static_website {
+  # The static website already creates the container $web without this option we would need to create it
+  static_website {  
     index_document = var.static_website_index_document
   }
+
+  depends_on = [azurerm_resource_group.rg]
 }
 
+# After creating Storage account the .py file executes which lists in the console in JSON format for Terraform
+data "external" "list_frontend_files" {
+  program = ["python", "${path.module}/list_files.py"]
 
-resource "azurerm_storage_container" "webstorage" {
-  name                  = var.storage_container_name
-  storage_account_name  = azurerm_storage_account.resumestoragetestfedev2.name
-  container_access_type = var.storage_container_access_type
-
-  depends_on = [azurerm_storage_account.resumestoragetestfedev2]
+  # Ensure that the script only runs after the storage account is created
+  depends_on = [azurerm_storage_account.resumestoragetestfede]
 }
+
+# Does a for each in the newly created JSON file creating each file listed in the file
+resource "azurerm_storage_blob" "blobs" {
+  for_each              = data.external.list_frontend_files.result
+  name                  = each.key
+  storage_account_name  = azurerm_storage_account.resumestoragetestfede.name
+  storage_container_name = var.storage_web_container_name
+  type                  = var.blob_type
+  source                = each.value
+
+}
+
 
 
 # Create CosmosDB Account
@@ -103,8 +117,8 @@ resource "azurerm_key_vault" "kv" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
-    key_permissions    = ["Get", "List", "Recover"]
-    secret_permissions = ["Get", "Set", "List", "Delete", "Recover", "Purge"]
+    key_permissions    = var.key_vault_key_permissions
+    secret_permissions = var.key_vault_secret_permissions
   }
 
 }
@@ -134,26 +148,27 @@ resource "azurerm_function_app" "function" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_service_plan.app_plan.location
   app_service_plan_id     = azurerm_service_plan.app_plan.id
-  storage_account_name   = azurerm_storage_account.resumestoragetestfedev2.name
-  storage_account_access_key = azurerm_storage_account.resumestoragetestfedev2.primary_access_key
+  storage_account_name   = azurerm_storage_account.resumestoragetestfede.name
+  storage_account_access_key = azurerm_storage_account.resumestoragetestfede.primary_access_key
   os_type             = var.function_app_os_type
 
   app_settings = {
     "FUNCTIONS_WORKER_RUNTIME" = "dotnet-isolated"  # Use the correct runtime here
-    "AzureWebJobsStorage" = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.resumestoragetestfedev2.name};AccountKey=${azurerm_storage_account.resumestoragetestfedev2.primary_access_key};EndpointSuffix=core.windows.net"
+    "AzureWebJobsStorage" = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.resumestoragetestfede.name};AccountKey=${azurerm_storage_account.resumestoragetestfede.primary_access_key};EndpointSuffix=core.windows.net"
     "CosmosDbConnectionString" = azurerm_key_vault_secret.cosmos_db_connection_string.value
   }
 
   site_config {
     cors {
       allowed_origins = [
-        "${azurerm_storage_account.resumestoragetestfedev2.primary_web_endpoint}"
+        "${azurerm_storage_account.resumestoragetestfede.primary_web_endpoint}"
       ]
+      support_credentials = true
     }
   }
 
   depends_on = [
-    azurerm_storage_account.resumestoragetestfedev2,
+    azurerm_storage_account.resumestoragetestfede,
     azurerm_key_vault.kv
   ]
 }
