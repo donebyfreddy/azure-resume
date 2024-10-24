@@ -12,7 +12,7 @@
 			"type": "process",
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
+				"cwd": "${workspaceFolder}/backend/api"
 			}
 		},
 		{
@@ -31,7 +31,7 @@
 			},
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
+				"cwd": "${workspaceFolder}/backend/api"
 			}
 		},
 		{
@@ -47,7 +47,7 @@
 			"type": "process",
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
+				"cwd": "${workspaceFolder}/backend/api"
 			}
 		},
 		{
@@ -58,20 +58,22 @@
 				"--configuration",
 				"Release",
 				"/property:GenerateFullPaths=true",
-				"/consoleloggerparameters:NoSummary"
+				"/consoleloggerparameters:NoSummary",
+				"--output",
+				"${workspaceFolder}/backend/api/Release/net8.0/publish"
 			],
 			"type": "process",
 			"dependsOn": "clean release (functions)",
 			"problemMatcher": "$msCompile",
 			"options": {
-				"cwd": "${workspaceFolder}/api"
+				"cwd": "${workspaceFolder}/backend/api"
 			}
 		},
 		{
 			"type": "func",
 			"dependsOn": "build (functions)",
 			"options": {
-				"cwd": "${workspaceFolder}/api/bin/Debug/net8.0"
+				"cwd": "${workspaceFolder}/backend/api/bin/Debug/net8.0"
 			},
 			"command": "host start",
 			"isBackground": true,

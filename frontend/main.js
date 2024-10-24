@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     getVisitCount();
 })
 
-const productionApiUrl = 'https://getresumecounter-v5.azurewebsites.net/api/GetVisitorCounter?';
+const productionApiUrl = 'https://getresumecounter-fede.azurewebsites.net/api/GetVisitorCounter?';
 const localApiUrl = 'http://localhost:7071/api/GetVisitorCounter';
 
 const getVisitCount = () => {
