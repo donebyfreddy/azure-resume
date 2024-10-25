@@ -5,6 +5,12 @@ terraform {
       version = ">= 3.0.0"
     }
   }
+  backend "azurerm" {
+    resource_group_name  = "my-tfstate-rg"
+    storage_account_name  = "mytfstate"
+    container_name        = "tfstate"
+    key                   = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
@@ -160,7 +166,7 @@ resource "azurerm_function_app" "function" {
 
   site_config {
     cors {
-      allowed_origins = [
+      allowed_origins = [ 
         "${azurerm_storage_account.resumestoragetestfede.primary_web_endpoint}"
       ]
       support_credentials = true
