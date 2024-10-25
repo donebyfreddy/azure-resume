@@ -2,9 +2,9 @@ name: "Terraform + Azure Function"
 
 env:
   ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
-  AZURE_FUNCTIONAPP_NAME: 'GetResumeCounter-fede'   # Set this to your function app name on Azure
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'backend/api'      # Set this to the path to your function app project
-  DOTNET_VERSION: '8.0.x'     
+  AZURE_FUNCTIONAPP_NAME: "GetResumeCounter-fede"
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: "backend/api"
+  DOTNET_VERSION: "8.0.x"
 
 on:
   push:
@@ -15,32 +15,28 @@ permissions:
   actions: write
   id-token: write
 
-
 jobs:
   terraform:
     name: "Terraform Deploy"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Debug Secrets
-        run: |
-          echo "Client ID: ${{ secrets.AZURE_CLIENT_ID }}"
-          echo "Tenant ID: ${{ secrets.AZURE_TENANT_ID }}"
-          echo "Subscription ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-
       - name: Azure Login with Service Principal
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          #clientSecret: ${{ secrets.AZURE_CLIENT_SECRET }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          creds: |
+            {
+              "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
+              "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.AZURE_TENANT_ID }}",
+              "clientId": "${{ secrets.AZURE_CLIENT_ID }}"
+            }
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -62,10 +58,7 @@ jobs:
   azfunction:
     name: "Azure Function Deploy"
     runs-on: ubuntu-latest
-    needs: [terraform]
-    defaults:
-      run:
-        shell: bash
+    needs: terraform
 
     steps:
       - name: Checkout
@@ -76,8 +69,7 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: "Build .NET Project"
-        shell: bash
+      - name: Build .NET Project
         run: |
           dotnet publish ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }} --configuration Release --output ./publish
 
@@ -86,8 +78,8 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: "Deploy to Azure Function App"
+      - name: Deploy to Azure Function App
         uses: Azure/functions-action@v1
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          package: './publish'
+          package: "./publish"
