@@ -39,16 +39,16 @@ jobs:
       # Initialize Terraform
       - name: Terraform Init
         run: terraform init
-        working-directory: ../terraform
+        working-directory: terraform
 
       # Plan Terraform changes
       - name: Terraform Plan
         run: terraform plan
-        working-directory: ../terraform
+        working-directory: terraform
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        working-directory: ../terraform
+        working-directory: terraform
 
   azfunction:
     name: "Azure Function Deploy"
