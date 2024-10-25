@@ -2,9 +2,9 @@ name: "Terraform + Azure Function"
 
 env:
   ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
-  AZURE_FUNCTIONAPP_NAME: "GetResumeCounter-fede"
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: "backend/api"
-  DOTNET_VERSION: "8.0.x"
+  AZURE_FUNCTIONAPP_NAME: "GetResumeCounter-v5"   # Ensure this matches your function app name
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: "backend/api"    # Path to your function app project
+  DOTNET_VERSION: "8.0.x"                          # Set this to your dotnet version
 
 on:
   push:
@@ -64,22 +64,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET Core
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }} # Use the AZURE_CREDENTIALS secret here
+
+      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Build .NET Project
+      - name: Resolve Project Dependencies Using Dotnet
         run: |
-          dotnet publish ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }} --configuration Release --output ./publish
-
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          pushd '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          dotnet restore
+          dotnet build --configuration Release --output ./output
+          popd
 
       - name: Deploy to Azure Function App
         uses: Azure/functions-action@v1
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          package: "./publish"
+          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
