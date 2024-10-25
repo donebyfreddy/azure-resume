@@ -15,8 +15,11 @@ terraform {
 
 provider "azurerm" {
   features {}
-  subscription_id = "720e477a-5ae7-45cb-bf13-65407359372a"
   resource_provider_registrations = "none"
+  client_id       = var.azure_client_id      # Set this in variables.tf
+  client_secret   = var.azure_client_secret  # Set this in variables.tf
+  tenant_id       = var.azure_tenant_id      # Set this in variables.tf
+  subscription_id  = var.azure_subscription_id # Set this in variables.tf
 }
 
 
