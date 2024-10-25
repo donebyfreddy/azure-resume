@@ -2,9 +2,9 @@ name: "Terraform + Azure Function"
 
 env:
   ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
-  AZURE_FUNCTIONAPP_NAME: "GetResumeCounter-v5"   # Ensure this matches your function app name
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: "backend/api"    # Path to your function app project
-  DOTNET_VERSION: "8.0.x"                          # Set this to your dotnet version
+  AZURE_FUNCTIONAPP_NAME: "getresumecounter-fede" # Set this to your function app name on Azure
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: "backend/api" # Set this to the path to your function app project, defaults to the repository root
+  DOTNET_VERSION: "8.0.x" # Specify the .NET version you want to use
 
 on:
   push:
@@ -12,41 +12,37 @@ on:
 
 permissions:
   contents: read
-  actions: write
-  id-token: write
 
 jobs:
   terraform:
     name: "Terraform Deploy"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
+      # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Azure Login with Service Principal
+      - name: Azure Login
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          creds: |
-            {
-              "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
-              "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
-              "tenantId": "${{ secrets.AZURE_TENANT_ID }}",
-              "clientId": "${{ secrets.AZURE_CLIENT_ID }}"
-            }
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.9.2"
 
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
         run: terraform init
         working-directory: ./terraform
 
+      # Generates an execution plan for Terraform
       - name: Terraform Plan
         run: terraform plan
         working-directory: ./terraform
@@ -58,31 +54,39 @@ jobs:
   azfunction:
     name: "Azure Function Deploy"
     runs-on: ubuntu-latest
-    needs: terraform
+    needs: [terraform]
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Login via Azure CLI
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }} # Use the AZURE_CREDENTIALS secret here
-
-      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      - name: Setup .NET ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Resolve Project Dependencies Using Dotnet
+      - name: Restore Project Dependencies
         run: |
-          pushd '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet restore
-          dotnet build --configuration Release --output ./output
           popd
+
+      - name: Build Project
+        run: |
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          dotnet build --configuration Release
+          popd
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy to Azure Function App
         uses: Azure/functions-action@v1
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          package: "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/bin/Release/net8.0/publish" # Adjust path if needed
