@@ -1,5 +1,7 @@
 namespace Api.Function;
 
+// C# File for incrementing counter in CosmosDB
+
 public interface IVisitorCounterService
 {
     Counter IncrementCounter(Counter counter);
