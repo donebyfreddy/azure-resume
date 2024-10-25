@@ -36,7 +36,7 @@ jobs:
         with:
           terraform_version: "1.9.2"
 
-      # Initialize Terraform
+      # Initialize Terraform (For previous folders use ./)
       - name: Terraform Init
         run: terraform init
         working-directory: ./terraform
