@@ -44,7 +44,3 @@ rm -rf .terraform*
 rm -rf terraform.tfstate*
 
 
-  "appId": "25397968-ee6a-4860-8475-e725524b749a",       
-  "displayName": "TerraformResume",
-  "password": "opT8Q~4rTa7S_oSNZB4pghfsxfuUjSkarBhXEc34",
-  "tenant": "a9cc48a2-f401-43af-a42b-494f007793e8"
