@@ -4,8 +4,12 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     getVisitCount();
 })
 
+// Use the localApiUrl when checking if the counter works using a local function
+
+// const localApiUrl = 'http://localhost:7071/api/GetVisitorCounter';
+
 const productionApiUrl = 'https://getresumecounter-fede.azurewebsites.net/api/GetVisitorCounter?';
-const localApiUrl = 'http://localhost:7071/api/GetVisitorCounter';
+
 
 const getVisitCount = () => {
     let count = 30;
