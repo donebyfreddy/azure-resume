@@ -14,10 +14,11 @@ def list_files_in_directory(directory):
     return files
 
 if __name__ == "__main__":
-    directory = "C:/Users/Federico Mencuccini/Mencuccini Dropbox/Federico Mencuccini/Aplicaciones/Cloud Projects/Azure/azure-resume/frontend"
+    # Define the directory you want to list
+    base_directory = os.path.normpath(os.getcwd() + os.sep + os.pardir)  # Gets the current working directory)
+    directory = os.path.join(base_directory, "frontend")  # Join base directory and 'frontend'
     files = list_files_in_directory(directory)
 
-    # Output as a JSON-encoded map directly to stdout
-    # Flatten the dictionary to make sure both keys and values are strings
+
     output = {str(key): str(value) for key, value in files.items()}
-    print(json.dumps(output))  # Ensure this is a flat JSON map of strings
+    print(json.dumps(output))  

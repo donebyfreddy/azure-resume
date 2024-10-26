@@ -1,7 +1,6 @@
-variable "azure_client_id" {}
-variable "azure_client_secret" {}
-variable "azure_tenant_id" {}
+# Azure Subscription
 variable "azure_subscription_id" {
+  description = "The subscription ID of our Infrastructure"
   type = string
 }
 
@@ -18,7 +17,20 @@ variable "resource_group_name" {
   type        = string
 }
 
-# Storage Account
+# Storage Account function App
+variable "functiondatafedetest_name" {
+  description = "The name of the storage account."
+  type        = string
+}
+
+
+variable "functiondatafedetest_kind" {
+  description = "The kind of the storage account."
+  type        = string
+}
+
+
+# Storage Account Static Website
 variable "storage_account_name" {
   description = "The name of the storage account."
   type        = string
@@ -60,6 +72,8 @@ variable "static_website_error_404_document" {
   description = "The 404 error document for the static website."
   type        = string
 }
+
+
 
 
 # Cosmos DB
