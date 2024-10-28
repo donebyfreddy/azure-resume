@@ -27,7 +27,7 @@ resource "azurerm_resource_group" "rg" {
 
 
 # Storage account for Function
-resource "azurerm_storage_account" "functiondatafedetest1" {
+resource "azurerm_storage_account" "functiondatafedetest" {
   name                     = var.functiondatafedetest_name
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
@@ -39,44 +39,6 @@ resource "azurerm_storage_account" "functiondatafedetest1" {
   # The static website already creates the container $web without this option we would need to create it
 
   depends_on = [azurerm_resource_group.rg]
-}
-
-
-# Create Storage Account for the Static website
-resource "azurerm_storage_account" "resumestoragetestfede1" {
-  name                     = var.storage_account_name
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  
-  account_tier             = var.storage_account_tier
-  account_replication_type = var.storage_account_replication_type
-  account_kind             = var.storage_account_kind
-
-  # The static website already creates the container $web without this option we would need to create it
-  static_website {  
-    index_document = var.static_website_index_document
-  }
-
-  depends_on = [azurerm_resource_group.rg]
-}
-
-# After creating Storage account the .py file executes which lists in the console in JSON format for Terraform
-data "external" "list_frontend_files" {
-  program = ["python", "${path.module}/list_files.py"]
-
-}
-
-# Does a for each in the newly created JSON file creating each file listed in the file
-resource "azurerm_storage_blob" "blobs" {
-  for_each              = data.external.list_frontend_files.result
-  name                  = each.key
-  storage_account_name  = azurerm_storage_account.resumestoragetestfede1.name
-  storage_container_name = var.storage_web_container_name
-  type                  = var.blob_type
-  source                = each.value
-
-  depends_on = [azurerm_storage_account.resumestoragetestfede1 ]
-
 }
 
 
@@ -173,27 +135,29 @@ resource "azurerm_function_app" "function" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_service_plan.app_plan.location
   app_service_plan_id     = azurerm_service_plan.app_plan.id
-  storage_account_name   = azurerm_storage_account.functiondatafedetest1.name
-  storage_account_access_key = azurerm_storage_account.functiondatafedetest1.primary_access_key
+  storage_account_name   = azurerm_storage_account.functiondatafedetest.name
+  storage_account_access_key = azurerm_storage_account.functiondatafedetest.primary_access_key
   os_type             = var.function_app_os_type
 
   app_settings = {
     "FUNCTIONS_WORKER_RUNTIME" = "dotnet-isolated"  # Use the correct runtime here
-    "AzureWebJobsStorage" = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.functiondatafedetest1.name};AccountKey=${azurerm_storage_account.functiondatafedetest1.primary_access_key};EndpointSuffix=core.windows.net"
+    "AzureWebJobsStorage" = "DefaultEndpointsProtocol=https;AccountName=${azurerm_storage_account.functiondatafedetest.name};AccountKey=${azurerm_storage_account.functiondatafedetest.primary_access_key};EndpointSuffix=core.windows.net"
     "CosmosDbConnectionString" = azurerm_key_vault_secret.cosmos_db_connection_string.value
   }
 
   site_config {
     cors {
-      allowed_origins = [ 
-        "${azurerm_storage_account.resumestoragetestfede1.primary_web_endpoint}"
+      allowed_origins = [
+        azurerm_public_ip.vm1_public_ip.ip_address,           # VM 1 Public IP
+        azurerm_public_ip.vm2_public_ip.ip_address,           # VM 2 Public IP
+        azurerm_public_ip.public_ip.ip_address                # Load Balancer Public IP
       ]
       support_credentials = true
     }
   }
 
   depends_on = [
-    azurerm_storage_account.functiondatafedetest1,
+    azurerm_storage_account.functiondatafedetest,
     azurerm_key_vault.kv
   ]
 }
