@@ -15,7 +15,7 @@ I have documented every step of this project, detailing the challenges encounter
 
 Additionally, I provide an overview of the tools used, such as GitHub and Terraform, along with a guide on how to utilize them to create a project on your own
 
-Link: https://shorturl.at/kFnq4
+[Full project documentation Here](https://shorturl.at/kFnq4)
 
 
 ## Useful Git Commands
@@ -36,6 +36,7 @@ Link: https://shorturl.at/kFnq4
 - `backend/api`: Folder contains the dotnet API deployed on Azure Functions.
     - `Counter.cs`: Contains the visitor counter code.
     - `GetVisitorCounter.cs`: Gets the counter number from the Cosmos DB
+    - `IVisitorCounterService.cs`: Counter incrementer
 - `.github/workflows/`: Folder contains **CI/CD workflow configurations** for the Frontend and Backend
 - `terraform`: Folder containing the infrastructure created with Terraform (IaC) using *Azure PaaS Services*
     - `AZ-104 Oriented`: To align with my goal of becoming a **Cloud Administrator**, I modified specific services to utilize IaaS-based solutions.
