@@ -31,23 +31,28 @@ Link: https://shorturl.at/kFnq4
 ## Structure
 
 - `frontend/`: Folder contains the website.
-    - `main.js`: Folder contains visitor counter code.
+    - `main.js`: Javascript file which gets the counter from the Function
+    - `index.html`: **HTML File Displaying Counter from `Main.js`**
 - `backend/api`: Folder contains the dotnet API deployed on Azure Functions.
     - `Counter.cs`: Contains the visitor counter code.
     - `GetVisitorCounter.cs`: Gets the counter number from the Cosmos DB
-- `.github/workflows/`: Folder contains CI/CD workflow configurations.
-- `terraform`: Folder containing the infrastructure created with Terraform (IaC) using Azure PaaS Services
-    - `AZ-104 Oriented`: To align with my goal of becoming a Cloud Administrator, I modified specific services to utilize IaaS-based solutions.
+- `.github/workflows/`: Folder contains **CI/CD workflow configurations** for the Frontend and Backend
+- `terraform`: Folder containing the infrastructure created with Terraform (IaC) using *Azure PaaS Services*
+    - `AZ-104 Oriented`: To align with my goal of becoming a **Cloud Administrator**, I modified specific services to utilize IaaS-based solutions.
 
 
 ## Frontend resources
 
 The front-end is a static site with HTML, CSS, and JavaScript. It's static and has a visitor counter. The visitor counter data fetched via an API call to an Azure Function.
 
-- I am a terrible designer, I used this [template](https://www.styleshout.com/free-templates/ceevee/) to create my site. 
-- I'm no JavaScript dev, but this [article](https://www.digitalocean.com/community/tutorials/how-to-use-the-javascript-fetch-api-to-get-data) explains well and in a simple way how to use it to make an API call.
-- [Azure storage explorer is a handy tool to use when working with Storage Accounts](https://azure.microsoft.com/en-us/features/storage-explorer/)
+- Here's the [HTML template](https://shorturl.at/NxjRL) I created for you to freely use and download:
+
+- If you do not like my template, I have left a more [modern template](https://www.styleshout.com/free-templates/ceevee/)
+
+- [Azure storage explorer](https://azure.microsoft.com/en-us/features/storage-explorer/) is a handy tool to use when working with Storage Accounts
+
 - This is how you can [deploy static site to blob storage.](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website-host)
+
 
 ## Backend resources
 
