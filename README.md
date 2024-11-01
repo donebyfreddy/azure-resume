@@ -2,58 +2,43 @@
 
 This is my Cloud Resume Challenge built on Azure. It's a static website hosted on Azure Storage, with a visitor counter built on Azure Functions. The website is built with HTML, CSS, and JavaScript. The visitor counter is built with .NET and Azure Functions. 
 
-If you'd like to build your own, here is the YouTube video [video](https://youtu.be/ieYrBWmkfno) 
 
 ![architecture](architecture.png)
 
 ## Demo
 
-[View it live here](https://www.gpsresume.com/)
+[View it live here](https://resumestoragefreddy.z13.web.core.windows.net/)
 
-## Pre-requisites
+## Full Documentation
 
-I leverage [Dev Containers](https://code.visualstudio.com/docs/remote/containers) for my development environment. If you'd like to use it, you'll need to install [Docker](https://www.docker.com/products/docker-desktop) and the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) for VS Code.
+I have documented every step of this project, detailing the challenges encountered and explaining the utility of each service. 
 
-Install C# (.NET) SDK (https://dotnet.microsoft.com/es-es/download)
+Additionally, I provide an overview of the tools used, such as GitHub and Terraform, along with a guide on how to utilize them to create a project on your own
 
-To get NuGet to work:
-dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
+Link: https://shorturl.at/kFnq4
 
 
-Git commands:
- * git config --global core.autocrlf true
- * rm -rf api/.git
+## Useful Git Commands
+
+ * rm -rf .git (Remove .GIT folder in case project not working correctly)
  * git add .
  * git add -A
  * git commit -m "Updated Structure"
  * git push origin main
 
-Things that could improve keyvault for the Connection String value:
-AccountEndpoint=https://azureresume-db-fede.documents.azure.com:443/;AccountKey=JlXL7dpeMSVvdOmxsF2t4UWxblF0vZl3aB4m3ZZssHvpbrLhswPHxa8zeBTyPDTLeE8W4yiHrcDmACDbEBPUjQ==;
 
-
-If Azure Functions cannot find net8.0/publish folder, it is inside of linux-x64, to change it go to /.vscode folder and settings.json and change it their
-
-AZ Login --tenant "FindTheIdInTenantPropertiesInAzure"
-
-Once installed:
-
-1. Make sure Docker is running.
-2. Open the project in VS Code.
-3. Ctrl/Cmd + Shift + P to open the command palette.
-4. Type "Reopen in Container" and select:
-    - [`.NET API`](.devcontainer/api/devcontainer.json) container is for working with Azure Functions backend.
-    - [`JS Frontend`](.devcontainer/frontend/devcontainer.json) container is for working with the frontend.
-5. VS Code will reload and you'll be in the container.
 
 ## Structure
 
 - `frontend/`: Folder contains the website.
     - `main.js`: Folder contains visitor counter code.
-- `api/`: Folder contains the dotnet API deployed on Azure Functions.
+- `backend/api`: Folder contains the dotnet API deployed on Azure Functions.
     - `Counter.cs`: Contains the visitor counter code.
+    - `GetVisitorCounter.cs`: Gets the counter number from the Cosmos DB
 - `.github/workflows/`: Folder contains CI/CD workflow configurations.
-- `.devcontainer`: Folder contains the my container configuration for VS Code.
+- `terraform`: Folder containing the infrastructure created with Terraform (IaC) using Azure PaaS Services
+    - `AZ-104 Oriented`: To align with my goal of becoming a Cloud Administrator, I modified specific services to utilize IaaS-based solutions.
+
 
 ## Frontend resources
 
@@ -89,8 +74,4 @@ The back-end is an [HTTP triggered Azure Functions](https://docs.microsoft.com/e
 - This is how you can [deploy an Azure Function to Azure with GitHub Actions.](https://github.com/marketplace/actions/azure-functions-action)
 - [Implement .NET testing in GitHub Actions.](https://docs.github.com/en/actions/guides/building-and-testing-net)
 
-## TO DO
 
-- Implement tests into CICD.
-- Create IaC files.
-- Improve tests and tests documentation.
