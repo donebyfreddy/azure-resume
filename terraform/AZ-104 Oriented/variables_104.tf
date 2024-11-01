@@ -17,34 +17,6 @@ variable "resource_group_name" {
   type        = string
 }
 
-# Storage Account function App
-variable "functiondatafedetest_name" {
-  description = "The name of the storage account."
-  type        = string
-}
-
-
-variable "functiondatafedetest_kind" {
-  description = "The kind of the storage account."
-  type        = string
-}
-
-variable "storage_account_tier" {
-  description = "The storage account tier."
-  type        = string
-}
-
-variable "storage_account_replication_type" {
-  description = "The replication type for the storage account."
-  type        = string
-}
-
-variable "storage_account_kind" {
-  description = "The kind of the storage account."
-  type        = string
-}
-
-
 
 # Virtual Machines
 variable "vm1_name" {
@@ -72,25 +44,11 @@ variable "os_disk_managed_disk_type" {
   type        = string
 }
 
-variable "os_publisher" {
-  description = "Image source for the VM's IIS being Windows"
+variable "source_image_ref" {
+  description = "Reference IIS Image VM Gallery"
   type        = string
 }
 
-variable "os_offer" {
-  description = "OS Type of Publisher, being Windows 10 "
-  type        = string
-}
-
-variable "os_sku" {
-  description = "PRO SKU"
-  type        = string
-}
-
-variable "os_version" {
-  description = "Which windows version is it being Latest"
-  type        = string
-}
 
 
 # Networking
@@ -182,7 +140,32 @@ variable "vm_admin_password" {
 
 
 
+# Storage Account function App
+variable "functiondatafedetest_name" {
+  description = "The name of the storage account."
+  type        = string
+}
 
+
+variable "functiondatafedetest_kind" {
+  description = "The kind of the storage account."
+  type        = string
+}
+
+variable "storage_account_tier" {
+  description = "The storage account tier."
+  type        = string
+}
+
+variable "storage_account_replication_type" {
+  description = "The replication type for the storage account."
+  type        = string
+}
+
+variable "storage_account_kind" {
+  description = "The kind of the storage account."
+  type        = string
+}
 
 
 

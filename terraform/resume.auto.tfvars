@@ -1,5 +1,5 @@
 # Azure Region and Resource Group
-azure_subscription_id               = "720e477a-5ae7-45cb-bf13-65407359372a"
+azure_subscription_id               = "<YourSubscriptionId>"
 location                            = "westus"
 resource_group_name                 = "resume-resources-6"
 

@@ -1,25 +1,16 @@
 # Azure Region and Resource Group
-azure_subscription_id               = "720e477a-5ae7-45cb-bf13-65407359372a"
+azure_subscription_id               = "<YourSubscriptionId>"
 location                            = "westus"
-resource_group_name                 = "resume-resources-10"
+resource_group_name                 = "resume-resources-az-104"
 
-# Function Data
-functiondatafedetest_name           = "functiondatafedetest"
-functiondatafedetest_kind           = "Storage"
-storage_account_tier                = "Standard"
-storage_account_replication_type    = "LRS"
-storage_account_kind                = "StorageV2"
 
 # VM'S
 vm1_name                            = "IIS-1"       
 vm2_name                            = "IIS-2"    
 vm_size                             = "Standard_DC1ds_v3"
 os_disk_caching                     = "ReadWrite"  
-os_disk_managed_disk_type           = "Standard"  
-os_offer                            = "MicrosoftWindowsDesktop"
-os_publisher                        = "windows-10"
-os_sku                              = "pro"
-os_version                          = "latest"
+os_disk_managed_disk_type           = "Standard"
+source_image_ref                    = "/subscriptions/<YourSubscriptionId>/resourceGroups/IIS-VM/providers/Microsoft.Compute/galleries/VMGallery/images/IIS-VM-Resume/versions/1.0.0"  
 
 # VM CREDENTIALS
 vm_admin_username                   = "Federico"
@@ -45,7 +36,16 @@ lb_public_ip_name                   = "LB-PublicIP"
 lb_public_ip_allocation_method      = "Static"
 vm1_public_ip_name                  = "VM1_PublicIP"
 vm2_public_ip_name                  = "VM2_PublicIP"
-vm_public_ip_allocation_method      = "Dynamic"
+vm_public_ip_allocation_method      = "Static"
+
+
+# Function Data
+functiondatafedetest_name           = "functiondatafedetest"
+functiondatafedetest_kind           = "Storage"
+storage_account_tier                = "Standard"
+storage_account_replication_type    = "LRS"
+storage_account_kind                = "StorageV2"
+
 
 # Cosmos DB Account
 cosmosdb_account_name               = "azureresume-db-testfede2"

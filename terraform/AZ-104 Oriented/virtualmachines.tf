@@ -74,7 +74,7 @@ resource "azurerm_lb_rule" "http_rule" {
   depends_on = [azurerm_lb.iis_lb]
 }
 
-# Network Interface for VM1
+
 # Network Interface for VM1
 resource "azurerm_network_interface" "vm1_nic" {
   name                = var.iis1_nic_name
@@ -100,6 +100,50 @@ resource "azurerm_network_interface" "vm2_nic" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+
+# Network Security Group for VMs
+resource "azurerm_network_security_group" "iis_nsg" {
+  name                = "NSG-IIS"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "Allow-HTTP"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-HTTPS"
+    priority                   = 110
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+# Associate NSG with VM1 Network Interface
+resource "azurerm_network_interface_security_group_association" "vm1_nic_nsg" {
+  network_interface_id      = azurerm_network_interface.vm1_nic.id
+  network_security_group_id = azurerm_network_security_group.iis_nsg.id
+}
+
+# Associate NSG with VM2 Network Interface
+resource "azurerm_network_interface_security_group_association" "vm2_nic_nsg" {
+  network_interface_id      = azurerm_network_interface.vm2_nic.id
+  network_security_group_id = azurerm_network_security_group.iis_nsg.id
+}
+
 
 # Virtual Network
 resource "azurerm_virtual_network" "iis_vnet" {
@@ -130,17 +174,14 @@ resource "azurerm_windows_virtual_machine" "vm1" {
 
   network_interface_ids = [azurerm_network_interface.vm1_nic.id]
 
+  source_image_id = var.source_image_ref
+
   os_disk {
     caching             = var.os_disk_caching
     storage_account_type = "Standard_LRS"
   }
 
-  source_image_reference {
-    publisher = var.os_publisher
-    offer     = var.os_offer
-    sku       = var.os_sku
-    version   = var.os_version
-  }
+
 }
 
 # Windows Virtual Machine 2
@@ -154,15 +195,12 @@ resource "azurerm_windows_virtual_machine" "vm2" {
 
   network_interface_ids = [azurerm_network_interface.vm2_nic.id]
 
+  source_image_id = var.source_image_ref
+
+
   os_disk {
     caching             = var.os_disk_caching
     storage_account_type = "Standard_LRS"
 
-  }
-  source_image_reference {
-    publisher = var.os_publisher
-    offer     = var.os_offer
-    sku       = var.os_sku
-    version   = var.os_version
   }
 }
