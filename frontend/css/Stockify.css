@@ -629,7 +629,7 @@
 
 .u-section-4 .u-layout-wrap-1 {
   margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 34px;
 }
 
 .u-section-4 .u-video-1 {
@@ -713,9 +713,10 @@
 .u-section-5 .u-social-icons-1 {
   height: 39px;
   min-height: 16px;
-  width: 137px;
   min-width: 68px;
-  margin: 32px 5px 0 auto;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-left: 10px;
 }
 
 .u-section-5 .u-icon-1 {
@@ -737,6 +738,7 @@
 
 .u-section-5 .u-container-layout-2 {
   padding: 30px 0;
+
 }
 
 .u-section-5 .u-text-1 {
@@ -1106,5 +1108,58 @@
     margin-top: 47px;
     margin-right: initial;
     margin-left: initial;
+  }
+}
+
+
+.u-container {
+  display: flex;
+
+
+}
+
+.u-image-wrapper {
+  flex-shrink: 0;
+  margin-right: 20px; /* Adds space between the image and text */
+
+
+}
+
+.u-section-5 .u-social-icons-1 {
+  display: inline;
+  align-items: left; /* Aligns icons vertically if there’s extra space */
+  justify-content: flex-start; /* Aligns icons to the left */
+  gap: 8px; /* Adjust spacing between icons */
+}
+
+.u-section-5 .u-social-icons-1 .u-icon {
+  width: 32px; /* Sets icon size */
+  height: 32px;
+}
+
+.u-section-5 .u-social-icons-1 img {
+  max-width: 100%; /* Ensures images fit the icon size */
+  max-height: 100%;
+}
+
+
+
+.u-content {
+  display: flex;
+
+
+}
+
+
+
+@media (max-width: 767px) {
+  .u-content-wrapper {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .u-image-1 {
+      margin-bottom: 15px; /* Space between the image and text */
   }
 }
