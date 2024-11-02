@@ -42,8 +42,10 @@
 .u-section-1 .u-btn-2 {
   font-size: 3rem;
   border-style: solid;
-  margin: 117px 0 27px auto;
+  margin: 117px 0 27px 55%;
   padding: 0;
+  align-items: flex-end;
+  justify-content: right;
 }
 
 .u-section-1 .u-icon-1 {
