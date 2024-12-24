@@ -15,7 +15,7 @@ I have documented every step of this project, detailing the challenges encounter
 
 Additionally, I provide an overview of the tools used, such as GitHub and Terraform, along with a guide on how to utilize them to create a project on your own
 
-[Full project documentation Here](https://www.dropbox.com/home/Federico%20Mencuccini/Aplicaciones/Cloud%20Projects/Docx%20and%20Cloud%20Stuff/Documentations?select=ResumeAzure_Documentation.pdf)
+[Full project documentation Here](https://www.dropbox.com/scl/fi/h36landwqom3qdotmhm61/ResumeAzure_Documentation.pdf?rlkey=p11bowysxxqvhb2crv7f64m0k&st=1dd0dn6c&dl=0)
 
 
 ## Useful Git Commands
