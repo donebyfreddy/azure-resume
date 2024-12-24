@@ -13,7 +13,10 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* HEADER ============================================ */
+/*HEADER
+============================================
+*/
+
 .header {
     padding-top: 10px;
     display: flex;
@@ -65,9 +68,13 @@ body {
     margin-right: 15px; 
 }
 
+
+
 .nav-menu a:hover {
     text-decoration: underline;
 }
+
+
 
 .dropdown {
     display: inline-block;
@@ -97,7 +104,14 @@ body {
     background-color: #f1f1f1;
 }
 
-/* SECTION (CERTIFICATIONS + MAIN-SECTION) ============================================ */
+
+
+
+
+/* SECTION (CERTIFICATIONS + MAIN-SECTION 
+============================================
+*/
+
 .content-wrapper {
     display: flex;
     justify-content: space-between;
@@ -147,6 +161,7 @@ body {
     height: 20px;
     padding-right: 5px;
     vertical-align: middle;
+
 }
 
 .language-list li {
@@ -157,7 +172,7 @@ body {
 
 .language-level {
     font-weight: bold;
-    color: #007bff;
+    color: #007bff; /* Matches the link color for consistency */
 }
 
 /* Skills Section */
@@ -176,13 +191,14 @@ body {
 }
 
 .skills-list li::before {
-    content: "\2023";
-    color: #000000;
+    content: "\2023"; /* Bullet point */
+    color: #000000; /* Matches the theme color */
     font-weight: bold;
     position: absolute;
     left: 0;
     top: 0;
 }
+
 
 /* Interests Section */
 .interests-list {
@@ -200,13 +216,25 @@ body {
 }
 
 .interests-list li::before {
-    content: "\2023";
-    color: #000000;
+    content: "\2023"; /* Bullet point */
+    color: #000000; /* Matches the theme color */
     font-weight: bold;
     position: absolute;
     left: 0;
     top: 0;
 }
+
+/* Section Titles */
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+
+
 
 .main-section {
     background-color: white;
@@ -215,7 +243,19 @@ body {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* EXPERIENCE SECTION ============================================ */
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+
+/* EXPERIENCE SECTION
+============================================
+*/
+
 .experience-item {
     margin-bottom: 20px;
 }
@@ -235,45 +275,136 @@ body {
     margin: 5px 0;
 }
 
-/* MEDIA QUERIES ============================================ */
-@media (max-width: 1024px) {
-    .header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .content-wrapper {
-        flex-direction: column;
-    }
-    
-    .right-section {
-        flex-basis: 100%;
-    }
-    
-    .main-section {
-        flex-basis: 100%;
-    }
+
+.job-recommendation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+
+}
+  
+.job-recommendation ul {
+list-style: none; 
+padding-left: 0;
+margin-right: 20px; 
 }
 
-@media (max-width: 768px) {
-    .header .photo img {
-        height: 100px;
-        width: 100px;
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        align-items: center;
-    }
+.job-recommendation ul li {
+position: relative;
+display: flex;
+flex-basis: 70%;
+padding-left: 15px;
+margin-bottom: 10px;
 }
 
-@media (max-width: 480px) {
-    .header .name {
-        font-size: 24px;
-    }
+.job-recommendation ul li::before {
+content: "\2022"; 
+color: black;
+font-weight: bold;
+position: absolute;
+left: 0;
+top: 0;
+}
+
+.recommendation-link {
+display: flex;
+flex-basis: 30%;
+align-items: center;
+text-decoration: none;
+border-style: solid;
+border-width: 2px;
+border-color: black;
+padding: 10px;
+}
+
+.recommendation-link i {
+color: red;
+border: #000000;
+}
+
+.recommendation-link:hover {
+text-decoration: underline;
+}
+
+
+
+/* PROJECTS
+============================================
+*/
+
+.project-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.project-list li {
+    margin-bottom: 20px;
+}
+
+.project-link {
+    margin-top: 5px;
+}
+
+.view-project {
+    color: #007bff; 
+    text-decoration: none;
+}
+
+.view-project img {
+    height: 16px; 
+    vertical-align: middle; 
+    margin-left: 5px; 
+}
+
+.technologies {
+    margin-top: 5px;
+    font-style: italic; 
+}
+
+.youtube-channel {
+    margin-top: 10px;
+}
+
+.youtube-link {
+    color: #ff0000; 
+    text-decoration: none;
+}
+
+.youtube-channel img {
+    height: 16px; 
+    vertical-align: middle; 
+    margin-left: 5px; 
+}
+
+
+/* EDUCATION
+============================================
+*/
+
+.education-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.education-list li {
+    margin-bottom: 20px;
+
+}
+
+.certification-list li {
+    list-style-type: circle;
+    color: black;
+}
+
+.certification-list li:hover {
+    color: blue; 
+    text-decoration: underline; 
     
-    .visitor-box {
-        width: 100%;
-    }
 }
+
+
+.education-details {
+    margin-top: 5px;
+}
+
