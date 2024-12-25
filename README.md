@@ -7,7 +7,7 @@ This is my Cloud Resume Challenge built on Azure. It's a static website hosted o
 
 ## Demo
 
-[View it live here](https://resumestoragefreddy.z13.web.core.windows.net/)
+[View it live here](https://fomencuccini.tech)
 
 ## Full Documentation
 
