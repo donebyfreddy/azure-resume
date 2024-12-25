@@ -42,7 +42,7 @@ key_vault_secret_permissions        = ["Get", "Set", "List", "Delete", "Recover"
 
 # Key Vault Secret
 key_vault_secret_name               = "CosmosDbConnectionString"
-key_vault_secret_value              = "AccountEndpoint=https://azureresume-db-testfede.documents.azure.com:443/;AccountKey=JlXL7dpeMSVvdOmxsF2t4UWxblF0vZl3aB4m3ZZssHvpbrLhswPHxa8zeBTyPDTLeE8W4yiHrcDmACDbEBPUjQ==;"
+key_vault_secret_value              = "PutYourEndpoint-String;"
 
 # APP Service Plan
 service_plan_name                   = "MyTestAppServicePlan2"
