@@ -38,7 +38,6 @@ body {
     padding: 0;
 }
 
-
 .header .contact-info {
     font-size: 14px;
     text-align: center;
@@ -59,6 +58,8 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+    justify-content: flex-start; /* Ensures items are aligned to the left */
+
     align-items: left; 
 }
 
@@ -70,13 +71,9 @@ body {
     margin-right: 15px; 
 }
 
-
-
 .nav-menu a:hover {
     text-decoration: underline;
 }
-
-
 
 .dropdown {
     display: inline-block;
@@ -105,8 +102,6 @@ body {
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
-
-
 
 
 
@@ -163,7 +158,6 @@ body {
     height: 20px;
     padding-right: 5px;
     vertical-align: middle;
-
 }
 
 .language-list li {
@@ -201,7 +195,6 @@ body {
     top: 0;
 }
 
-
 /* Interests Section */
 .interests-list {
     list-style-type: none;
@@ -235,9 +228,6 @@ body {
     margin-bottom: 20px;
 }
 
-
-
-
 .main-section {
     background-color: white;
     padding: 20px;
@@ -252,7 +242,6 @@ body {
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
-
 
 /* EXPERIENCE SECTION
 ============================================
@@ -277,13 +266,11 @@ body {
     margin: 5px 0;
 }
 
-
 .job-recommendation {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-left: 20px;
-
 }
   
 .job-recommendation ul {
@@ -309,27 +296,60 @@ left: 0;
 top: 0;
 }
 
+/* Updated .recommendation-link and dropdown */
 .recommendation-link {
-display: flex;
-flex-basis: 30%;
-align-items: center;
-text-decoration: none;
-border-style: solid;
-border-width: 2px;
-border-color: black;
-padding: 10px;
+    display: flex;
+    flex-basis: 30%;
+    align-items: center;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .recommendation-link i {
-color: red;
-border: #000000;
+    color: red;
+    border: #000000;
 }
 
 .recommendation-link:hover {
-text-decoration: underline;
+    text-decoration: underline;
 }
 
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 
+/* Hidden dropdown content initially */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Display dropdown when hovering over the link */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Style the dropdown links */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
 
 /* PROJECTS
 ============================================
@@ -347,6 +367,13 @@ text-decoration: underline;
 .project-link {
     margin-top: 5px;
 }
+
+.project-separator {
+  border: none;
+  border-top: 2px solid #ccc; /* Gray color for the line */
+  margin: 10px 0; /* Adds space above and below the line */
+}
+
 
 .view-project {
     color: #007bff; 
@@ -379,7 +406,6 @@ text-decoration: underline;
     margin-left: 5px; 
 }
 
-
 /* EDUCATION
 ============================================
 */
@@ -391,7 +417,6 @@ text-decoration: underline;
 
 .education-list li {
     margin-bottom: 20px;
-
 }
 
 .certification-list li {
@@ -402,18 +427,8 @@ text-decoration: underline;
 .certification-list li:hover {
     color: blue; 
     text-decoration: underline; 
-    
 }
-
 
 .education-details {
     margin-top: 5px;
 }
-
-
-
-
-
-
-
-  
