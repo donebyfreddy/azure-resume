@@ -31,11 +31,13 @@ body {
     text-align: left;
 }
 
-.header .name {
+.header .name h1 {
     font-size: 36px;
     font-weight: bold;
     margin: 0;
+    padding: 0;
 }
+
 
 .header .contact-info {
     font-size: 14px;
@@ -271,8 +273,6 @@ body {
     color: #000000;
 }
 
-
-
 .experience-item p {
     margin: 5px 0;
 }
@@ -411,46 +411,9 @@ text-decoration: underline;
 }
 
 
-/* MEDIA QUERIES ============================================ */
-@media (max-width: 1024px) {
-    .header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .content-wrapper {
-        flex-direction: column;
-    }
-    
-    .right-section {
-        flex-basis: 100%;
-    }
-    
-    .main-section {
-        flex-basis: 100%;
-    }
-}
 
-@media (max-width: 768px) {
-    .header .photo img {
-        height: 100px;
-        width: 100px;
-    }
 
-    .nav-menu {
-        flex-direction: column;
-        align-items: center;
-    }
-}
 
-@media (max-width: 480px) {
-    .header .name {
-        font-size: 24px;
-    }
-    
-    .visitor-box {
-        width: 100%;
-    }
-}
 
+
+  
