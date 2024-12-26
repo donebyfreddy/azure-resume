@@ -11,8 +11,18 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Preload Font Awesome CSS -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style">
 
+  <!-- Defer Font Awesome CSS loading -->
+  <script>
+    window.onload = function () {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css';
+      document.head.appendChild(link);
+    };
+  </script>
   <!-- JavaScript -->
   <script src="main.js"></script>
 
@@ -40,7 +50,8 @@
         </div>
 
         <!-- Joined Letters of Recomendation -->
-        <a href="files/Letters-Of-Recomendation_Federico.pdf"><i class="fa fa-star" style="margin-right: 5px;"></i> Recomendations</a>
+        <a href="files/Letters-Of-Recomendation_Federico.pdf"><i class="fa fa-star" style="margin-right: 5px;"></i>
+          Recomendations</a>
 
 
       </div>
@@ -120,8 +131,8 @@
                 <a href="files/Amundi_Recomendation_Spanish.pdf" target="_blank">Spanish</a>
               </div>
             </div>
-            
-            
+
+
           </div>
 
         </div>
@@ -217,7 +228,8 @@
             </div>
             <div class="technologies">
               <i class="fa-solid fa-arrow-right-long"></i>
-              Technologies going to be used: Azure Blob Storage, SQL Server, Node.JS, Azure Machine Learning, KeyVault, Functions, Python, Load Balancing,
+              Technologies going to be used: Azure Blob Storage, SQL Server, Node.JS, Azure Machine Learning, KeyVault,
+              Functions, Python, Load Balancing,
               Github, Terraform
             </div>
 
