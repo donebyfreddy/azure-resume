@@ -432,3 +432,123 @@ top: 0;
 .education-details {
     margin-top: 5px;
 }
+
+
+
+/* Media Queries for Mobile Devices */
+
+/* General Mobile Viewport Adjustments */
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 10px;
+        margin: 10px;
+        box-shadow: none;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .header .photo img {
+        height: 100px;
+        width: 100px;
+    }
+
+    .header .name h1 {
+        font-size: 28px;
+    }
+
+    .header .contact-info {
+        font-size: 12px;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu a {
+        margin: 5px 0;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .right-section {
+        flex-basis: 100%;
+        margin-bottom: 20px;
+    }
+
+    .main-section {
+        flex-basis: 100%;
+    }
+}
+
+/* Adjustments for Extra Small Screens */
+@media only screen and (max-width: 480px) {
+    .header .photo img {
+        height: 80px;
+        width: 80px;
+    }
+
+    .header .name h1 {
+        font-size: 24px;
+    }
+
+    .header .contact-info {
+        font-size: 10px;
+    }
+
+    .visitor-box {
+        width: auto;
+        padding: 8px;
+    }
+
+    .language-list li, .skills-list li, .interests-list li {
+        font-size: 14px;
+    }
+
+    .job-recommendation {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .job-recommendation ul {
+        margin-right: 0;
+    }
+
+    .recommendation-link {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* For Narrow Mobile Screens */
+@media only screen and (max-width: 360px) {
+    .header {
+        padding: 5px;
+    }
+
+    .header .name h1 {
+        font-size: 20px;
+    }
+
+    .right-section .cert-row img {
+        height: 60px;
+    }
+
+    .nav-menu a {
+        font-size: 12px;
+    }
+
+    .view-project img, .youtube-channel img {
+        height: 12px;
+    }
+}
