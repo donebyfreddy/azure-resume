@@ -99,8 +99,8 @@
 
 .u-section-2 .u-repeater-1 {
   min-height: 516px;
-  grid-auto-columns: calc(33.3333% - 6.66667px);
-  grid-template-columns: repeat(3, calc(33.3333% - 6.66667px));
+  grid-auto-columns: calc(25% - 6.66667px);
+  grid-template-columns: repeat(4, calc(33.3333% - 6.66667px));
   grid-gap: 10px;
 }
 
@@ -152,6 +152,12 @@
   margin-bottom: 0;
 }
 
+.u-section-3 .u-image-4 {
+  height: 307px;
+  margin-top: -9px;
+  margin-bottom: 0;
+}
+
 .u-section-2 .u-text-6 {
   font-weight: 700;
   margin: 20px 61px 0 0;
@@ -178,7 +184,7 @@
 @media (max-width: 1199px) {
   .u-section-2 .u-repeater-1 {
     grid-auto-columns: calc(33.333333333333336% - 6.66667px);
-    grid-template-columns: repeat(3, calc(33.333333333333336% - 6.66667px));
+    grid-template-columns: repeat(4, calc(33.333333333333336% - 6.66667px));
   }
 
   .u-section-2 .u-image-1 {
@@ -198,6 +204,10 @@
   }
 
   .u-section-2 .u-image-3 {
+    height: 243px;
+  }
+
+  .u-section-3 .u-image-4 {
     height: 243px;
   }
 
@@ -221,6 +231,10 @@
   }
 
   .u-section-2 .u-image-3 {
+    height: 288px;
+  }
+
+  .u-section-3 .u-image-4 {
     height: 288px;
   }
 }
@@ -257,6 +271,10 @@
   .u-section-2 .u-image-3 {
     height: 499px;
   }
+
+  .u-section-3 .u-image-4 {
+    height: 499px;
+  }
 }
 
 @media (max-width: 575px) {
@@ -288,6 +306,10 @@
   }
 
   .u-section-2 .u-image-3 {
+    height: 307px;
+  }
+
+  .u-section-3 .u-image-4 {
     height: 307px;
   }
 }.u-section-3 .u-sheet-1 {
@@ -351,7 +373,19 @@
   padding: 20px 30px;
 }
 
+.u-section-4 .u-container-layout-4 {
+  padding-top: 50px;
+  padding: 20px 30px;
+}
+
 .u-section-3 .u-image-3 {
+  height: 219px;
+  margin-top: 0;
+  margin-bottom: 0;
+  object-position: 50% 44.7%;
+}
+
+.u-section-4 .u-image-4 {
   height: 219px;
   margin-top: 0;
   margin-bottom: 0;
@@ -414,6 +448,10 @@
     height: 170px;
   }
 
+  .u-section-4 .u-image-4 {
+    height: 170px;
+  }
+
   .u-section-3 .u-text-7 {
     margin-left: 0;
   }
@@ -443,6 +481,10 @@
   }
 
   .u-section-3 .u-image-3 {
+    height: 291px;
+  }
+
+  .u-section-4 .u-image-4 {
     height: 291px;
   }
 
@@ -484,7 +526,16 @@
     padding-right: 10px;
   }
 
+  .u-section-4 .u-container-layout-4 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .u-section-3 .u-image-3 {
+    height: 504px;
+  }
+
+  .u-section-4 .u-image-4 {
     height: 504px;
   }
 
@@ -527,6 +578,10 @@
   }
 
   .u-section-3 .u-image-4 {
+    height: 310px;
+  }
+
+  .u-section-4 .u-image-4 {
     height: 310px;
   }
 }.u-section-4 .u-sheet-1 {
