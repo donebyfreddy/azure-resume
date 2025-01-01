@@ -1,0 +1,8 @@
+# robots.txt file for https://www.fomencuccini.tech
+
+# Allow all search engines to index your site
+User-agent: *
+Disallow:
+
+# Specify the location of the sitemap
+Sitemap: https://www.fomencuccini.tech/sitemap.xml
